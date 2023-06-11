@@ -5,41 +5,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOP Project: Calculator</title>
-  <script src="code.js"></script>
+  <script src="code.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Calculator</h1>
   <section class="calculator">
-    <div class="results">123456789</div>
+    <div class="results"></div>
     <div class="buttons">
       <div class="buttons-row">
         <button id="clear" class="btn btn-double">Clear</button>
         <button id="backspace" class="btn btn-double">Back</button>
       </div>
       <div class="buttons-row">
-        <button class="btn btn-number">7</button>
-        <button class="btn btn-number">8</button>
-        <button class="btn btn-number">9</button>
-        <button class="btn btn-operator">/</button>
+        <button class="btn btn-number" data-n="7">7</button>
+        <button class="btn btn-number" data-n="8">8</button>
+        <button class="btn btn-number" data-n="9">9</button>
+        <button class="btn btn-operator" data-operator="/">/</button>
       </div>
       <div class="buttons-row">
-        <button class="btn btn-number">4</button>
-        <button class="btn btn-number">5</button>
-        <button class="btn btn-number">6</button>
-        <button class="btn btn-operator">*</button>
+        <button class="btn btn-number" data-n="4">4</button>
+        <button class="btn btn-number" data-n="5">5</button>
+        <button class="btn btn-number" data-n="6">6</button>
+        <button class="btn btn-operator" data-operator="*">*</button>
       </div>
       <div class="buttons-row">
-        <button class="btn btn-number">1</button>
-        <button class="btn btn-number">2</button>
-        <button class="btn btn-number">3</button>
-        <button class="btn btn-operator">-</button>
+        <button class="btn btn-number" data-n="1">1</button>
+        <button class="btn btn-number" data-n="2">2</button>
+        <button class="btn btn-number" data-n="3">3</button>
+        <button class="btn btn-operator" data-operator="-">-</button>
       </div>
       <div class="buttons-row">
-        <button class="btn btn-number">.</button>
-        <button class="btn btn-number">0</button>
-        <button class="btn btn-number">=</button>
-        <button class="btn btn-operator">+</button>
+        <button class="btn btn-dot">.</button>
+        <button class="btn btn-number" data-n="0">0</button>
+        <button class="btn btn-equal">=</button>
+        <button class="btn btn-operator" data-operator="+">+</button>
       </div>
     </div>
   </section>
