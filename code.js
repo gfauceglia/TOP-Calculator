@@ -30,7 +30,7 @@ function operate(n1, n2, oper) {
   }
 }
 
-display = document.querySelector('.results');
+let display = document.querySelector('.results');
 
 function populateDisplay(string) {
   display.textContent += string;
@@ -42,7 +42,13 @@ function clearDisplay(n) {
   return;
 }
 
+let n1, n2, oper, temp;
+
 document.getElementById('clear').addEventListener('click', () => clearDisplay(0));
+
+document.getElementById('backspace').addEventListener('click', () => {
+  // ver ultima modificacion y ponerle el valor de temp
+});
 
 document.querySelectorAll('.btn-number').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -59,6 +65,11 @@ document.querySelectorAll('.btn-number').forEach(btn => {
         populateDisplay(n);
         break;
     };
+    if (oper) {
+      n2 = parseFloat(display.textContent);
+    } else {
+      n1 = parseFloat(display.textContent);
+    }
   });
 });
 
@@ -66,11 +77,19 @@ document.querySelectorAll('.btn-operator').forEach(btn => {
   btn.addEventListener('click', () => {
     operator = btn.dataset.operator;
     clearDisplay(operator);
+    oper = operator;
   });
 });
 
 document.querySelector('.btn-equal').addEventListener('click', () => {
-  clearDisplay('result');
+  if (typeof(n1) == 'number' && typeof(n2) == 'number' && oper){
+    let result = operate(n1, n2, oper);
+    clearDisplay(result);
+    temp = result,
+    n1 = undefined,
+    n2 = undefined,
+    oper = '';
+  }
 })
 
 document.querySelector('.btn-dot').addEventListener('click', () => {
