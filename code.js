@@ -42,18 +42,19 @@ function clearDisplay(n) {
   return;
 }
 
-let n1, n2, oper, temp;
-
-document.getElementById('clear').addEventListener('click', () => clearDisplay(0));
+let n1, n2, oper, temp, result;
 
 document.getElementById('backspace').addEventListener('click', () => {
-  // ver ultima modificacion y ponerle el valor de temp
+  if (typeof(temp) != 'undefined') {
+    clearDisplay(temp)
+  }
 });
 
 document.querySelectorAll('.btn-number').forEach(btn => {
   btn.addEventListener('click', () => {
-    n = parseInt(btn.dataset.n);
-    switch (display.textContent) {
+    n = btn.dataset.n;
+    temp = display.textContent;
+    switch (temp) {
       case '0':
       case '+':
       case '-':
@@ -65,35 +66,47 @@ document.querySelectorAll('.btn-number').forEach(btn => {
         populateDisplay(n);
         break;
     };
-    if (oper) {
-      n2 = parseFloat(display.textContent);
-    } else {
-      n1 = parseFloat(display.textContent);
-    }
   });
 });
 
 document.querySelectorAll('.btn-operator').forEach(btn => {
   btn.addEventListener('click', () => {
-    operator = btn.dataset.operator;
-    clearDisplay(operator);
-    oper = operator;
+    temp = display.textContent;
+    // Sees if there is a result stored.
+      // If it has, saves the current display in n2, makes the operation
+      // and stores the result in n1
+
+      // If not, saves the display in n1
+    // In both cases, stores the clicked operator button as a new operator
+    if (result) {
+      n2 = parseFloat(display.textContent);
+      n1 = result;
+    } else {
+      n1 = parseFloat(display.textContent);
+    }
+    oper = btn.dataset.operator;
+    clearDisplay(oper);
   });
 });
 
 document.querySelector('.btn-equal').addEventListener('click', () => {
-  if (typeof(n1) == 'number' && typeof(n2) == 'number' && oper){
-    let result = operate(n1, n2, oper);
-    clearDisplay(result);
-    temp = result,
-    n1 = undefined,
-    n2 = undefined,
+  if (typeof(n1) == 'number' && oper) {
+    temp = display.textContent;
+    n2 = parseFloat(temp);
+    result = operate(n1, n2, oper);
+    clearDisplay(result.toFixed(9));
     oper = '';
   }
 })
 
-document.querySelector('.btn-dot').addEventListener('click', () => {
-  populateDisplay('.');
-})
+document.getElementById('clear').addEventListener('click', () => {
+  clearDisplay(0);
+  n1 = undefined;
+  n2 = undefined;
+  temp = undefined;
+  result = undefined;
+  oper = ''
+}
+);
 
 populateDisplay('0');
